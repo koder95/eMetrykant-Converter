@@ -1,0 +1,24 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: linear-gradient(#ffc44f, #ffffaa);
+}
+
+.removing-button {
+    -fx-background-color:
+        linear-gradient(#ff3434, #ff0000),
+        radial-gradient(center 50% -40%, radius 200%, #ee3535 45%, #c80000 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #fff;
+}
+
+.speclass {
+    -fx-background-color:
+        linear-gradient(#e59800, #ffff38 75%, #e59800);
+    -fx-text-fill: #c80000;
+    -fx-font-weight: bold;
+}

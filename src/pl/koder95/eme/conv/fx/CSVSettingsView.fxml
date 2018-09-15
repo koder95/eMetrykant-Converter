@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane styleClass="mainFxmlClass" stylesheets="@csvsettingsview.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.koder95.eme.conv.fx.CSVSettingsViewController">
+   <left>
+      <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" prefWidth="250.0" text="Lista plików CSV do konwersji" BorderPane.alignment="CENTER">
+         <content>
+            <ScrollPane>
+               <content>
+                  <VBox fx:id="filesCSVList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </content>
+      </TitledPane>
+   </left>
+   <center>
+        <TitledPane collapsible="false" prefHeight="309.0" prefWidth="503.0" text="Ustawienia formatu CSV" BorderPane.alignment="CENTER">
+           <content>
+            <VBox spacing="10.0">
+               <children>
+                  <FlowPane hgap="10.0">
+                     <children>
+                          <Label text="Specyfikacja:" />
+                          <ChoiceBox fx:id="specificationsBox" prefHeight="25.0" prefWidth="200.0" styleClass="speclass" />
+                     </children>
+                  </FlowPane>
+                  <FlowPane hgap="15.0">
+                     <children>
+                        <Label text="Kodowanie:" />
+                        <ChoiceBox fx:id="charsetBox" prefHeight="25.0" prefWidth="200.0" styleClass="speclass" />
+                     </children>
+                  </FlowPane>
+                  <FlowPane hgap="15.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Szablon XML:" />
+                        <Button mnemonicParsing="false" onAction="#setXMLTemplate" styleClass="speclass" text="nie wybrano" fx:id="xmlTemplateSetter" />
+                     </children>
+                  </FlowPane>
+                    <CheckBox disable="true" mnemonicParsing="false" text="Modyfikacje" />
+                    <ScrollPane disable="true" fitToHeight="true" fitToWidth="true" prefHeight="70.0" prefWidth="463.0" />
+               </children>
+            </VBox>
+           </content>
+        </TitledPane>
+   </center>
+   <bottom>
+      <TitledPane collapsible="false" prefWidth="753.0" text="Działania" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane prefHeight="62.0" prefWidth="751.0">
+               <children>
+                  <ToolBar layoutX="14.0" layoutY="27.0" prefHeight="35.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0">
+                    <items>
+                      <Button fx:id="csvFileAdder" mnemonicParsing="false" onAction="#addNewCSVFile" text="Dodaj plik CSV" />
+                        <Button disable="true" mnemonicParsing="false" text="Dodaj modyfikację formatu" />
+                    </items>
+                  </ToolBar>
+                  <ProgressBar fx:id="convertProgress" layoutX="33.0" layoutY="66.0" pickOnBounds="false" prefHeight="18.0" prefWidth="635.0" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ProgressBar>
+                  <Button fx:id="convert" defaultButton="true" disable="true" layoutX="626.0" layoutY="28.0" mnemonicParsing="false" onAction="#convert" text="KONWERUJ" textFill="#008800" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="Arial Narrow Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+   </bottom>
+   <top>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+         <children>
+            <Label text="Konwerter CSV" textFill="#dd0000">
+               <font>
+                  <Font name="Arial Narrow Bold" size="48.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#00bfff" height="15.07" radius="5.4925" spread="0.37" width="8.9" />
+               </effect>
+            </Label>
+            <Label layoutX="198.0" layoutY="10.0" text="dla eMetrykant v0.2" textFill="#0092db">
+               <font>
+                  <Font name="Arial Narrow Bold" size="22.0" />
+               </font>
+               <effect>
+                  <Reflection fraction="0.62" topOffset="-5.0" topOpacity="1.0" />
+               </effect>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>
