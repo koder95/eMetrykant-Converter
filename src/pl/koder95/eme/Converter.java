@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.koder95.eme.conv.Version;
 
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
  * Klasa dziedziczy po {@link Application}.
  *
  * @author Kamil Jan Mularski [@koder95]
- * @version 1.0.0, 2018-09-15
+ * @version 1.0.1, 2020-08-08
  * @since 1.0.0
  * @see Application
  */
@@ -33,7 +34,7 @@ public class Converter extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("eMetrykant Converter");
+        primaryStage.setTitle("eMetrykant Converter v" + Version.get().toString());
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

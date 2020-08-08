@@ -59,6 +59,8 @@ import static pl.koder95.eme.conv.template.XMLTemplate.XML_FILES;
  */
 public class CSVSettingsViewController implements Initializable {
 
+    private static final File INITIAL_DIRECTORY = new File(System.getProperty("user.dir"));
+
     @FXML
     private VBox filesCSVList;
     @FXML
@@ -110,12 +112,18 @@ public class CSVSettingsViewController implements Initializable {
      */
     @FXML
     public void addNewCSVFile() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Wybieranie plików");
-        chooser.getExtensionFilters().add(CSV_FILES);
+        FileChooser chooser = createFileChooser("Wybieranie plików", CSV_FILES);
         List<File> selected = chooser.showOpenMultipleDialog(null);
         if (selected == null) return;
         selected.forEach((file) -> addNewCSVFile(file.getPath()));
+    }
+
+    private FileChooser createFileChooser(String title, FileChooser.ExtensionFilter filter) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle(title);
+        chooser.setInitialDirectory(INITIAL_DIRECTORY);
+        chooser.getExtensionFilters().add(filter);
+        return chooser;
     }
 
     /**
@@ -131,9 +139,7 @@ public class CSVSettingsViewController implements Initializable {
      */
     @FXML
     public void setXMLTemplate() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Wybieranie szablonu XML");
-        chooser.getExtensionFilters().add(XML_FILES);
+        FileChooser chooser = createFileChooser("Wybieranie szablonu XML", XML_FILES);
         File selected = chooser.showOpenDialog(null);
         if (selected == null) {
             xmlTemplateSetter.setText("nie wybrano");
@@ -210,21 +216,9 @@ public class CSVSettingsViewController implements Initializable {
         disableAll(false);
         convert.setDisable(true);
         filesCSVList.getChildren().clear();
-        specificationsBox.getSelectionModel().clearSelection();
-        // enterTest();
-    }
 
-    private void enterTest() {
-        File selected = new File("C:\\Users\\Kamil\\OneDrive\\JAVA\\GitHub Repositories" +
-                "\\eMetrykant\\templates.xml");
-        xmlTemplateSetter.setText(selected.getName());
-        xmlTmplFile = selected;
-
-        convert.setDisable(false);
-        specificationsBox.getSelectionModel().select(E_METRYKANT_FORMAT_NAME);
+        specificationsBox.getSelectionModel().select(specificationsBox.getItems().size()-1);
         charsetBox.getSelectionModel().select("UTF-8");
-        addNewCSVFile("C:\\Users\\Kamil\\OneDrive\\JAVA\\GitHub Repositories\\eMetrykant\\data\\csv\\" +
-                "Księga ochrzczonych.csv");
     }
     
     private static HBox createNewCSVFileRow(String path,
