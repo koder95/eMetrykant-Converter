@@ -36,6 +36,8 @@ import java.util.stream.Collectors;
 /**
  *
  * @author Kamil Jan Mularski [@koder95]
+ * @version 1.0.2, 2020-08-18
+ * @since 1.0.0
  */
 public class XMLTemplate {
 
@@ -126,16 +128,15 @@ public class XMLTemplate {
                 ).map(Section::getFields).reduce(new LinkedList<>(), (result, current)->{
                     result.addAll(current);
                     return result;
-                        }).stream().reduce((result, current) -> {
-                            return current.getIndex() == index? current : result;
-                        }).get();
+                }).stream().reduce((result, current) -> current.getIndex() == index? current : result).get();
     }
 
     /**
      * Tworzy nowy rekord XML. Najpierw ustalana jest pozycja roku, który określany jest przez wybór ostatniej
      * kolumny, która nie jest pusta. Następnie pozycja aktu ustalana jest przez odjęcie liczby 1 od pozycji roku.
-     * Kolejnym etapem jest odczytanie kolejnych wartości i dodanie ich do nowego rekordu XML. Na końcu dodawany
-     * jest atrybut {@code an} składający się z aktu i roku rozdzielonych znakiem {@literal /}.
+     * Kolejnym etapem jest odczytanie kolejnych wartości, zamiana znaków {@code '_'} na pojedyncze {@code ' '}
+     * i dodanie tych wartości do nowego rekordu XML. Na końcu dodawany jest atrybut {@code an} składający się
+     * z aktu i roku, które rozdzielone są znakiem {@literal /}.
      *
      * @param book nazwa księgi
      * @param csv pojedynczy rekord z pliku CSV
@@ -162,6 +163,7 @@ public class XMLTemplate {
                 continue;
             } else if (i > yearIndex) break;
             Field f = getField(book, i++);
+            r = r.replaceAll("_+", " ");
             record.put(f.getAttr(), r);
         }
         record.put("an", actNumber + "/" + year);

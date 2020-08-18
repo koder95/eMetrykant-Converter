@@ -54,7 +54,7 @@ import static pl.koder95.eme.conv.template.XMLTemplate.XML_FILES;
  * Klasa tworzy i określa kontroler pliku CSVSettingsView.fxml.
  *
  * @author Kamil Jan Mularski [@koder95]
- * @version 1.0.0, 2018-09-15
+ * @version 1.0.1, 2020-08-08
  * @since 1.0.0
  */
 public class CSVSettingsViewController implements Initializable {
